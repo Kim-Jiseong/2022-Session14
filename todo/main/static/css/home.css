@@ -2,7 +2,16 @@
     width: 80%;
     margin: 0 auto;
 }
-.inputWrapper{
+.usernameWrapper{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.username{
+    width: 40%;
+}
+
+.inputForm{
     display: flex;
     width: 100%;
     justify-content: space-between;
@@ -16,7 +25,7 @@
 }
 .submitBtn{
     width: 15%;
-    height: 1.6rem;
+    line-height: 1.6rem;
     padding: 10px;
     display:flex;
     justify-content: center;

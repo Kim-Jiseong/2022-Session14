@@ -20,5 +20,12 @@
 <body>
     {% block content %}
     {% endblock %}  
+    {% comment %} 여기에 테스트 {% endcomment %}
+    <button type="button" onclick="test()">테스트</button>
+    <script>const test = () => {
+            console.log("localStorage 아이템 생김")
+            window.localStorage.setItem('test', 'content')
+        }
+    </script>
 </body>
 </html>

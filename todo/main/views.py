@@ -5,27 +5,30 @@ import json
 from .models import Todo
 # Create your views here.
 def home(request):
-    todolist = Todo.objects.all()
+    # todolist = Todo.objects.all()
     # todolist = Todo.objects.order_by('-id')
-    context = {'todolist': todolist}
-    return render(request, 'main/home.html', context)
+    # context = {'todolist': todolist}
+    # return render(request, 'main/home.html', context)
+    return render(request, 'main/home.html')
+
 
 
 
 @csrf_exempt
 def get_todo_notFinished(request):
-    todolist = list(Todo.objects.filter(done = False).order_by('-id').values())#done == false인 todo를 찾고 id의 역순으로 정렬, json 변환 시 에러 피하기 위해 values() 사용 
+    todolist = list(Todo.objects.filter(done = False).order_by('-id').values()) #done == False인 todo를 찾고 id의 역순으로 정렬, json 변환 시 에러 피하기 위해 values() 사용 
     print(todolist)
     context = {'todolist': todolist}
     print(context)
-    return HttpResponse(json.dumps(context, default=str))
+    return HttpResponse(json.dumps(context, default=str)) #datetime은 그냥 넘기면 오류 발생하므로 string으로 변경
 
+@csrf_exempt
 def get_todo_finished(request):
-    todolist = list(Todo.objects.filter(done = True).order_by('-id').values())#done == false인 todo를 찾고 id의 역순으로 정렬, json 변환 시 에러 피하기 위해 values() 사용 
+    todolist = list(Todo.objects.filter(done = True).order_by('-id').values()) #done == True인 todo를 찾고 id의 역순으로 정렬, json 변환 시 에러 피하기 위해 values() 사용 
     print(todolist)
     context = {'todolist': todolist}
     print(context)
-    return HttpResponse(json.dumps(context, default=str))
+    return HttpResponse(json.dumps(context, default=str)) #datetime은 그냥 넘기면 오류 발생하므로 string으로 변경
 
 @csrf_exempt
 def new_todo(request):
@@ -60,7 +63,6 @@ def delete_todo(request):
 @csrf_exempt
 def check(request):
     data = json.loads(request.body)
-    print('이거요', data)
     context = {
         'result': 'not found'
     }
